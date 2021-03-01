@@ -15,6 +15,7 @@
     "./esm": "./esm/discord.mjs"
   },
   "scripts": {
+    "mocha": "mocha test/mocha/tests/unit/**/*.spec.[jt]s --recursive --bail --sort --require test/mocha/config/setup.js --config test/mocha/config/.mocharc.js",
     "test": "npm run lint && npm run docs:test && npm run lint:typings",
     "test:typescript": "tsc",
     "docs": "docgen --source src --custom docs/index.yml --output docs/docs.json",
