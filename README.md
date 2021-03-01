@@ -1,3 +1,15 @@
+# This branch is a special fork to automate discord bot testing
+
+## to test a discord bot, you need 3 requirements
+
+- a ci bot (has admin perms)
+- a bot to be tested
+- a user bot to be used as test
+
+## how to run the tests
+
+check `example.spec.js`
+
 <div align="center">
   <br />
   <p>
