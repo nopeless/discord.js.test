@@ -16,6 +16,7 @@ docs/
 
 # NPM ignore
 .eslintrc.json
+.eslintrc.js
 .gitattributes
 .gitignore
 .travis.yml
