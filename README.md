@@ -1,10 +1,44 @@
 # This branch is a special fork to automate discord bot testing
 
-## to test a discord bot, you need 3 requirements
+<details>
+<summary>Why another package? Why not a wrapper?</summary>
+The whole point of this fork is to allow easy testing via replacing all `discord.js` with `discord.js.test` (this will not break anything unless you are not using the latest `discord.js`)
 
-- a ci bot (has admin perms)
+I originally thought about creating a wrapper, but here are reasons why that didn't work
+
+  1. User#bot behavior is not changable by adding a wrapper. Unless you want to rewrite your whole code base, this is the better option
+  2. Various methods are injected to make testing easier. This is also not possible with a wrapper
+  3. Other packages either do not implement point 1.
+</details>
+
+
+## to test a discord bot, you need at least 2 bots
+
 - a bot to be tested
 - a user bot to be used as test
+- (optional) a ci bot (has admin perms)
+
+> a lot of the options don't even have a framework. The reason is that everyone has a different bot structure, and implementing a setup for mocha isn't something for a framework
+
+<details><summary>The env file and guild settings used for `setup.js`</summary>
+
+```env
+# the bot that is subject to testing
+DISCORD_TOKEN=
+DISCORD_BOT_ID=
+
+# the manager bot that has admin perms
+DISCORD_CI_TOKEN=
+
+# the user bot that will execute commands
+DISCORD_USER_TOKEN=
+
+# optional: the guild to test this
+DISCORD_GUILD=
+```
+
+The guild has a channel named `general` and another named `system` (marked as a systems channel)
+</details>
 
 ## how to run the tests
 
@@ -19,6 +53,11 @@ check `test\mocha\DOCS.md` for update log and docs
 do `npm run mocha` with 3 tokens and try the bot
 
 ## Example output
+
+![#system](https://cdn.discordapp.com/attachments/814550071328112652/816371239223951430/unknown.png)
+
+![#general](https://cdn.discordapp.com/attachments/807937355074764810/816363065188417566/unknown.png)
+
 ```
 
 Logging in...
