@@ -152,6 +152,13 @@ class Client extends BaseClient {
      */
     this.user = null;
 
+    // Create a collection of user bots. injected option
+    this.userBots = new Collection();
+    (options.userBots || []).forEach(v => this.userBots.set(v, true));
+
+    // Register a delay prop
+    this.delay = options.delay;
+
     /**
      * Time at which the client was last regarded as being in the `READY` state
      * (each time the client disconnects and successfully reconnects, this will be overwritten)
