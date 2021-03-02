@@ -16,7 +16,7 @@ describe('Basic Test', function () {
   });
   describe('react this', function () {
     it('should react to the message with joy', async function () {
-      // Sends to every channel
+      // Sends to first channel
       return (await member.channel().send(`${prefix}react`)).expectReaction({
         some: ['😂'],
       });
