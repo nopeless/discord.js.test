@@ -1,0 +1,2 @@
+# the only reason im creating a separate git ignore is so that the file wont conflict with future merges
+.env
