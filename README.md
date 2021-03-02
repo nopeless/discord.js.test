@@ -12,6 +12,8 @@ check `tests/mocha/README.md` for why this fork exists and
 
 check `example.spec.js` for examples
 
+check `test\mocha\DOCS.md` for update log and docs
+
 > note: if you want to test the bot, you need `mocha` and `dotenv`, which is not included in package.json since i don't want to touch it
 
 do `npm run mocha` with 3 tokens and try the bot
