@@ -146,9 +146,7 @@ exports.mochaHooks = {
   async beforeEach() {
     if (delay.sleep) {
       if (delay.sleep > 0) {
-        console.log(`waiting for previous timeout to end... delay ${delay.sleep}`);
         await sleep(delay.sleep);
-        console.log(`done waiting`);
       }
     }
   },
