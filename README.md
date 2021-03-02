@@ -18,6 +18,34 @@ check `test\mocha\DOCS.md` for update log and docs
 
 do `npm run mocha` with 3 tokens and try the bot
 
+## Example output
+```
+
+Logging in...
+user client logged in as Discord CI#4505
+user client logged in as discord-db tester#4422
+user client logged in as Emma P#3648
+All clients are logged in. Testing for guild
+guild set to 814550070790979645
+fetching members...
+channels: general, system-channel, afk channel
+config==================================
+  CI Bot: Discord CI#4505
+     Bot: discord-db tester#4422
+User Bot: Emma P#3648
+========================================
+  Basic Test
+    ping command
+      √ should return pong
+    react this
+      √ should react to the message with joy
+
+Disconnecting clients...
+
+  2 passing (11s)
+
+```
+
 <div align="center">
   <br />
   <p>
