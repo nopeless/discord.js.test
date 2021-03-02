@@ -8,7 +8,7 @@ I originally thought about creating a wrapper, but here are reasons why that did
 
   1. User#bot behavior is not changable by adding a wrapper. Unless you want to rewrite your whole code base, this is the better option
   2. Various methods are injected to make testing easier. This is also not possible with a wrapper
-  3. Other packages either do not implement point 1.
+  3. Other packages either do not implement point 1, or are outdated.
 </details>
 
 
