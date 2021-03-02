@@ -169,7 +169,7 @@ class Client extends BaseClient {
       noZeroWidthSpace: true,
       noOverflow: true,
       from: undefined,
-      delay: 0,
+      delay: 1000,
       timeout: 5000,
       reply: true,
       noDoubleSpace: true,
