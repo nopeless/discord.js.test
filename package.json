@@ -1,6 +1,6 @@
 {
-  "name": "discord.js",
-  "version": "12.5.1",
+  "name": "discord.js.test",
+  "version": "1.0.0",
   "description": "A powerful library for interacting with the Discord API",
   "main": "./src/index",
   "types": "./typings/index.d.ts",
@@ -29,9 +29,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/discordjs/discord.js.git"
+    "url": "git+https://github.com/nopeless/discord.js.test.git"
   },
   "keywords": [
+    "test",
     "discord",
     "api",
     "bot",
@@ -42,9 +43,9 @@
   "author": "Amish Shah <amishshah.2k@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/discordjs/discord.js/issues"
+    "url": "https://github.com/nopeless/discord.js.test/issues"
   },
-  "homepage": "https://github.com/discordjs/discord.js#readme",
+  "homepage": "https://github.com/nopeless/discord.js.test#readme",
   "runkitExampleFilename": "./docs/examples/ping.js",
   "unpkg": "./webpack/discord.min.js",
   "dependencies": {
