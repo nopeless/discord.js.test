@@ -36,7 +36,7 @@ message.expectMessage({
 	// default to undefined which means it will accept anyone
 	from: process.env.DISCORD_BOT_ID || undefined,
 
-	// Wait 5 seconds AFTER this test
+	// Wait x seconds AFTER this test
 	// default 1000 (1 second)
 	delay: 1000,
 
@@ -86,6 +86,25 @@ message.expectMessage({
 	// like1 this or like 1this
 	checkSpacing: true,
 })
+
+// Setting up bots
+// Please read setup.js as that is a working example of a setup
+
+// Injected option userBots
+const botClient = new Discord.Client({
+  intents: Intents.ALL,
+  // These users will return true for User#bot
+  userBots: ['688503512581144657'],
+});
+
+// Use other defaults
+userClient.setExpect({
+  delay: 5000,
+  timeout: 10000,
+  noFalsy: true,
+  from: process.env.DISCORD_BOT_ID,
+  reply: true,
+});
 
 ```
 
