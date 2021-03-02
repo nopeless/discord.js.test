@@ -159,6 +159,23 @@ class Client extends BaseClient {
     // Register a delay prop
     this.delay = options.delay;
 
+    // Default options
+    this._expect = {
+      type: 'any',
+      every: [],
+      some: [],
+      none: [],
+      noFalsy: true,
+      noZeroWidthSpace: true,
+      noOverflow: true,
+      from: undefined,
+      delay: 0,
+      timeout: 5000,
+      reply: true,
+      noDoubleSpace: true,
+      checkSpacing: true,
+    };
+
     /**
      * Time at which the client was last regarded as being in the `READY` state
      * (each time the client disconnects and successfully reconnects, this will be overwritten)
@@ -169,6 +186,14 @@ class Client extends BaseClient {
     if (this.options.messageSweepInterval > 0) {
       this.setInterval(this.sweepMessages.bind(this), this.options.messageSweepInterval * 1000);
     }
+  }
+
+  // Overrides default options
+  setExpect(options) {
+    this._expect = {
+      ...this._expect,
+      ...options,
+    };
   }
 
   /**
