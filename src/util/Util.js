@@ -3,6 +3,7 @@
 const { parse } = require('path');
 const fetch = require('node-fetch');
 const { Colors, DefaultOptions, Endpoints } = require('./Constants');
+const removeMarkdown = require('./removeMarkdown');
 const { Error: DiscordError, RangeError, TypeError } = require('../errors');
 const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
 const isObject = d => typeof d === 'object' && d !== null;
@@ -76,6 +77,135 @@ class Util {
       msg += (msg && msg !== prepend ? char : '') + chunk;
     }
     return messages.concat(msg).filter(m => m);
+  }
+
+  /**
+   * Injected remove markdown util. This is not edgecase safe, rather a quick hack
+   * @param {StringResolvable} text Text to strip
+   * @returns {string}
+   */
+  static removeMarkdown(text) {
+    if (!text) return '';
+    function splitByCodeBlock(raw) {
+      let blocks = [];
+      for (const block of raw.split(/```(?:[A-Za-z0-9\-+]*\n)?/)) {
+        blocks.push(block);
+      }
+      return blocks;
+    }
+    let isCodeblock = false;
+    const finalBlocks = [];
+    for (const block of splitByCodeBlock(text)) {
+      if (isCodeblock) {
+        finalBlocks.push(removeMarkdown(block));
+      } else {
+        finalBlocks.push(block);
+      }
+      isCodeblock = !isCodeblock;
+    }
+    return finalBlocks.join(`\n`);
+  }
+
+  /**
+   * Injected embed to plain text conversion util.
+   * @param {Object} embed The embed to convert
+   * @param {Message} message the message to reference
+   * @returns {string}
+   */
+  static embedToText(embed, message) {
+    if (embed.toJSON) {
+      embed = embed.toJSON();
+    }
+    let finalString = [];
+    function appendStripped(t) {
+      if (!t) return;
+      finalString.push(removeMarkdown(t));
+    }
+    appendStripped(embed.content);
+    const embedField = embed.embed;
+    if (embedField) {
+      appendStripped(removeMarkdown(embed.title));
+      appendStripped(removeMarkdown(embed.description));
+      appendStripped(embed.footer?.text);
+      for (const f of embed.fields || []) {
+        appendStripped(f.name);
+        appendStripped(this.cleanContent(removeMarkdown(f.value), message));
+      }
+    }
+    return finalString.join('\n');
+  }
+  /**
+   * Injected embed to raw text conversion util.
+   * @param {Object} embed The embed to convert
+   * @returns {string}
+   */
+  static embedToRawText(embed) {
+    if (embed.toJSON) {
+      embed = embed.toJSON();
+    }
+    let finalString = [];
+    function append(t) {
+      if (!t) return;
+      finalString.push(t);
+    }
+    append(embed.content);
+    const embedField = embed.embed;
+    if (embedField) {
+      append(embed.title);
+      append(embed.description);
+      append(embed.footer?.text);
+      for (const f of embed.fields || []) {
+        append(f.name);
+        append(f.value);
+      }
+    }
+    return finalString.join('\n');
+  }
+
+  static messageToText(message) {
+    let finalStringArr = [];
+    if (message.cleanContent) finalStringArr.push(message.cleanContent);
+    for (const embed of message.embeds) {
+      finalStringArr.push(this.embedToText(embed, message));
+    }
+    return finalStringArr.join('\n') || '';
+  }
+
+  static messageToRawText(message) {
+    let finalStringArr = [];
+    if (message.content) finalStringArr.push(message.content);
+    for (const embed of message.embeds) {
+      finalStringArr.push(this.embedToRawText(embed));
+    }
+    return finalStringArr.join('\n') || '';
+  }
+
+  /**
+   * Strip custom textable stuff (channels, emojis, users), so that
+   * @param {string} text the text to strip
+   * @returns {string}
+   */
+  static stripEmojis(text) {
+    if (!text) return '';
+    // A newline can stay, but a single trailing space will be stripped
+    return text.replace(/<\w*:[^:\s]+:\d{17,20}>(?:(?!\n)\s)?/g, '');
+  }
+
+  static stripURL(text) {
+    // Just your standard url.
+    return text.replace(
+      // eslint-disable-next-line max-len
+      /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&//=]*)(?:(?!\n)\s)?/g,
+      '',
+    );
+  }
+
+  static humanize(text) {
+    return this.stripEmojis(this.stripURL(text))
+      .replace(/@(everyone|here)(?:(?!\n)\s)?/g, '')
+      .replace(/<@!?(\d{17,19})>(?:(?!\n)\s)?/g, '')
+      .replace(/<@&(\d{17,19})>(?:(?!\n)\s)?/g, '')
+      .replace(/<#(\d{17,19})>(?:(?!\n)\s)?/g, '');
   }
 
   /**
