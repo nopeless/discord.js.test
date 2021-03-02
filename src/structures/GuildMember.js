@@ -89,6 +89,15 @@ class GuildMember extends Base {
     return clone;
   }
 
+  // Injected shorthand channel. returns first match of .match(arg[0])
+  channel(name) {
+    let ch = this.guild.channels.cache.find(v => v.name.match(name));
+    if (!ch) {
+      throw new Error(`Channel with the name ${name} was not found`);
+    }
+    return ch;
+  }
+
   /**
    * Whether this GuildMember is a partial
    * @type {boolean}
