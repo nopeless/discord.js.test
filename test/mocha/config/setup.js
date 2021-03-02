@@ -25,7 +25,6 @@ const delay = {
 // Set up clients
 const botClient = new Discord.Client({
   intents: Intents.ALL,
-  // I have no idea what im doing
   userBots: ['688503512581144657'],
 });
 
@@ -42,12 +41,11 @@ botClient.on(`message`, m => {
 const ciClient = new Discord.Client({
   intents: Intents.ALL,
 });
+
 // Inject delay option
 const userClient = new Discord.Client({
   intents: Intents.ALL,
   delay,
-  // I think this should work
-  // userBots: ['688503512581144657'],
 });
 userClient.setExpect({
   delay: 5000,
@@ -68,7 +66,6 @@ function readyHook(client) {
 
 globalThis.sleep = t => new Promise(r => setTimeout(r, t));
 
-// This is some sort of prehook
 exports.mochaHooks = {
   async beforeAll() {
     console.log('Logging in...');
