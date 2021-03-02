@@ -8,7 +8,13 @@
 
 ## how to run the tests
 
-check `example.spec.js`
+check `tests/mocha/README.md` for why this fork exists and
+
+check `example.spec.js` for examples
+
+> note: if you want to test the bot, you need `mocha` and `dotenv`, which is not included in package.json since i don't want to touch it
+
+do `npm run mocha` with 3 tokens and try the bot
 
 <div align="center">
   <br />
