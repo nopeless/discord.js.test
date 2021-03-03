@@ -6,11 +6,10 @@ The whole point of this fork is to allow easy testing via replacing all `discord
 
 I originally thought about creating a wrapper, but here are reasons why that didn't work
 
-  1. User#bot behavior is not changable by adding a wrapper. Unless you want to rewrite your whole code base, this is the better option
-  2. Various methods are injected to make testing easier. This is also not possible with a wrapper
-  3. Other packages either do not implement point 1, or are outdated.
+1. User#bot behavior is not changable by adding a wrapper. Unless you want to rewrite your whole code base, this is the better option
+2. Various methods are injected to make testing easier. This is also not possible with a wrapper
+3. Other packages either do not implement point 1, or are outdated.
 </details>
-
 
 ## to test a discord bot, you need at least 2 bots
 
@@ -38,6 +37,7 @@ DISCORD_GUILD=
 ```
 
 The guild has a channel named `general` and another named `system` (marked as a systems channel)
+
 </details>
 
 ## how to run the tests
