@@ -95,6 +95,7 @@ const botClient = new Discord.Client({
   intents: Intents.ALL,
   // These users will return true for User#bot
   userBots: ['688503512581144657'],
+  // userBots: [] or undefined -> every bot will be marked as a user
 });
 
 // Use other defaults

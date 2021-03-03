@@ -51,6 +51,11 @@ class User extends Base {
        * @type {boolean}
        */
       this.bot = Boolean(data.bot);
+      // Injected behavior difference
+      // mark as bot if no users were specified
+      if (!this.client.userBots.size || (this.bot && this.client.userBots.get(this.id))) {
+        this.bot = false;
+      }
     }
 
     if ('discriminator' in data) {
