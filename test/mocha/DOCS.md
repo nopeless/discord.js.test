@@ -106,10 +106,24 @@ userClient.setExpect({
   from: process.env.DISCORD_BOT_ID,
   reply: true,
 });
-
 ```
 
+# Version matching chart
+
+| discord.js | discord.js.test                 |
+| ---------- | ------------------------------- |
+| \*master   | 1.0.x (do not use this version) |
+| 12.5.1     | 1.1.0                           |
+
 # Update logs
+
+## 1.1.0
+
+Track 12.5.1 instead of master of discord.js
+
+## 1.0.1
+
+minor md updates
 
 ## 1.0.0
 
