@@ -2,7 +2,7 @@
 
 <details>
 <summary>Why another package? Why not a wrapper?</summary>
-The whole point of this fork is to allow easy testing via replacing all `discord.js` with `discord.js.test` (this will not break anything unless you are not using the latest `discord.js`)
+The whole point of this fork is to allow easy testing via replacing all `discord.js` with `discord.js.test` (this will not break anything unless you are not using the latest `discord.js` see `DOCS.md` for versioning info.)
 
 I originally thought about creating a wrapper, but here are reasons why that didn't work
 
