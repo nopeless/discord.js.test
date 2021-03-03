@@ -25,7 +25,7 @@
     "lint:typings": "tslint typings/index.d.ts",
     "prettier": "prettier --write src/**/*.js typings/**/*.ts",
     "build:browser": "webpack",
-    "prepublishOnly": "npm run test && cross-env NODE_ENV=production npm run build:browser"
+    "prepublishOnly": "npm run test"
   },
   "repository": {
     "type": "git",
