@@ -11,7 +11,7 @@ I originally thought about creating a wrapper, but here are reasons why that did
 3. Other packages either do not implement point 1, or are outdated.
 </details>
 
-## to test a discord bot, you need at least 2 bots
+## to test a discord bot, you need at least 2 bots (or 1 if you only want a user bot)
 
 - a bot to be tested
 - a user bot to be used as test
@@ -84,6 +84,24 @@ Disconnecting clients...
   2 passing (11s)
 
 ```
+
+## How to integrate this into your project
+
+1. rename all `` ["'`]discord\.js["'`] `` to `path.join(process.cwd(), 'discord.js')`
+2. create a folder called `discord.js` at root
+3. create an `index.js` file with content
+
+   ```js
+   // Your condition here
+   if (process.env.UNIT_TESTING) {
+     // console.log(`using test file`);
+     module.exports = require(`discord.js.test`);
+   } else {
+     module.exports = require(`discord.js`);
+   }
+   ```
+
+   this will create a flexible environment
 
 <div align="center">
   <br />
