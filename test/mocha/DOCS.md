@@ -121,7 +121,7 @@ userClient.setExpect({
 | discord.js | discord.js.test                 |
 | ---------- | ------------------------------- |
 | \*master   | 1.0.x (do not use this version) |
-| 12.5.1     | 1.1.0                           |
+| 12.5.1     | 1.1.x                           |
 
 # Update logs
 
