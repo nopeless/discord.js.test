@@ -205,7 +205,7 @@ class Base {
         for (const every of options.every) {
           if (!resolvables.some(v => matcher(v, every))) {
             // Every option failed
-            return reject(new Error(`Expected ${every} to match the message`));
+            return reject(new Error(`Expected '${every}' to match the message`));
           }
         }
 
@@ -219,7 +219,7 @@ class Base {
           }
         }
         if (!pass) {
-          return reject(new Error(`Message resolvables did not match any of ${options.some}`));
+          return reject(new Error(`Message resolvables did not match any of '${options.some}'`));
         }
 
         // None option
@@ -259,7 +259,7 @@ class Base {
           match = humanText.match(/(?:\w\d|\d\w).{0,10}/s);
           if (match) {
             return reject(
-              new Error(`The message had a number next to a letter here -> ${match[0]} 'options.checkSpacing'`),
+              new Error(`The message had a number next to a letter here -> '${match[0]}' 'options.checkSpacing'`),
             );
           }
         }
@@ -301,7 +301,9 @@ class Base {
         for (const every of options.every) {
           if (!resolvables.some(v => matcher(v, every))) {
             // Every option failed
-            return reject(new Error(`Unexpected emoji ${r.emoji}. Expected ${every} to match one of ${resolvables}`));
+            return reject(
+              new Error(`Unexpected emoji '${r.emoji}'. Expected '${every}' to match one of '${resolvables}'`),
+            );
           }
         }
 
@@ -315,14 +317,14 @@ class Base {
           }
         }
         if (!pass) {
-          return reject(new Error(`emoji ${r.emoji} resolvables did not match any of ${options.some}`));
+          return reject(new Error(`emoji '${r.emoji}' resolvables did not match any of '${options.some}'`));
         }
 
         // None option
         for (const none of options.none) {
           if (resolvables.some(v => matcher(v, none))) {
             return reject(
-              new Error(`Unexpected emoji ${r.emoji}. Expected ${none} to not match any of ${resolvables}`),
+              new Error(`Unexpected emoji '${r.emoji}'. Expected '${none}' to not match any of '${resolvables}'`),
             );
           }
         }

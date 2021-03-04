@@ -123,6 +123,7 @@ userClient.setExpect({
 
 Features:
 (options.from) Now accepts arrays
+(Base.js expect) now has easier to understand error messages
 
 Bug fixes:
 (options.from) ID being a falsy value will properly skip from returning false
