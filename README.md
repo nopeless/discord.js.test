@@ -1,6 +1,11 @@
 # This branch is a special fork to automate discord bot testing
 
 <details>
+<summary>Is this a good idea to test a discord bot?</summary>
+No. But it works. I'm working on a flimsy mock library that allows you to test certain actions without actually sending it to the discord server/api
+</details>
+
+<details>
 <summary>Why another package? Why not a wrapper?</summary>
 The whole point of this fork is to allow easy testing via replacing all `discord.js` with `discord.js.test` (this will not break anything unless you are not using the latest `discord.js` see `DOCS.md` for versioning info.)
 
@@ -11,7 +16,7 @@ I originally thought about creating a wrapper, but here are reasons why that did
 3. Other packages either do not implement point 1, or are outdated.
 </details>
 
-## to test a discord bot, you need at least 2 bots (or 1 if you only want a user bot)
+## The example uses 3 bots, but its really up to you
 
 - a bot to be tested
 - a user bot to be used as test
