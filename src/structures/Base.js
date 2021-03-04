@@ -160,14 +160,6 @@ class Base {
       collector = channel.createMessageCollector(filter, collectorOptions);
 
       const collect = m => {
-        // Handle 'from' option
-        if (m.author.id !== (options.from.id || options.from)) {
-          return reject(
-            new Error(
-              `Expected reply from ${options.from.id || options.from}, got from ${m.author.id} ${m.author.tag}`,
-            ),
-          );
-        }
         // Handle 'type' option =========================================================
         if (options.type === 'text') {
           if (!m.content) {
