@@ -255,6 +255,12 @@ class Base {
             );
           }
         }
+        if (options.noEveryone) {
+          match = m.content.match(/@(everyone|here).{0,10}/s);
+          if (match) {
+            return reject(new Error(`The message had an '${match[1]} ping here -> ${match[0]} 'options.noEveryone'`));
+          }
+        }
 
         last = m;
         collector.stop();

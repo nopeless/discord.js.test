@@ -123,6 +123,7 @@ userClient.setExpect({
 
 Features:
 (options.from) Now accepts arrays
+(options.noEveryone) New option. Rejects with an error if `@here` or `@everyone` is in the string
 (Base.js expect) now has easier to understand error messages
 
 Bug fixes:
