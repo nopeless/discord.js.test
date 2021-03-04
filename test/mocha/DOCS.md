@@ -103,6 +103,8 @@ userClient.setExpect({
   delay: 5000,
   timeout: 10000,
   noFalsy: true,
+  // can accept an array of ids or objects with.id
+  // if falsy accept any
   from: process.env.DISCORD_BOT_ID,
   reply: true,
 });
@@ -116,6 +118,15 @@ userClient.setExpect({
 | 12.5.1     | 1.1.0                           |
 
 # Update logs
+
+## 1.1.1
+
+Features:
+(options.from) Now accepts arrays
+
+Bug fixes:
+(options.from) ID being a falsy value will properly skip from returning false
+(setup.js) change invalid flags that I forgot to remove
 
 ## 1.1.0
 

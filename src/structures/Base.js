@@ -91,6 +91,13 @@ class Base {
             throw new Error(`o.from was not a string and did not have a string .id property. o.from was ${o.from}`);
           }
         }
+        if (Array.isArray(o.from)) {
+          if (!o.from.every(v => typeof v === 'string' || typeof v?.id === 'string')) {
+            throw new Error(
+              `o.from was an array but not all of them were strings or objects with string property 'id'`,
+            );
+          }
+        }
       }
       for (const s of ['delay', 'timeout']) {
         if (o[s]) {
@@ -135,8 +142,16 @@ class Base {
       const filter = m => {
         if (m.author.id === this.client.user.id) return false;
         // If from is specified, try to match it
-        const fromId = options.from || options.from?.id;
-        if (m.author.id !== fromId) return false;
+        if (options.from) {
+          if (Array.isArray(options.from)) {
+            for (const o of options.from) {
+              if (m.author.id !== o && m.author.id !== o?.id) return false;
+            }
+          } else {
+            const fromId = options.from || options.from?.id;
+            if (m.author.id !== fromId) return false;
+          }
+        }
         return true;
       };
       const channel = subjectMessage.channel;
@@ -266,8 +281,16 @@ class Base {
       const filter = (r, user) => {
         if (r.me) return false;
         // If from is specified, try to match it
-        const fromId = options.from || options.from?.id;
-        if (user.id !== fromId) return false;
+        if (options.from) {
+          if (Array.isArray(options.from)) {
+            for (const o of options.from) {
+              if (user.id !== o && user.id !== o?.id) return false;
+            }
+          } else {
+            const fromId = options.from || options.from?.id;
+            if (user.id !== fromId) return false;
+          }
+        }
         return true;
       };
       collector = subjectMessage.createReactionCollector(filter, collectorOptions);
