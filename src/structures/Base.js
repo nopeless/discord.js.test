@@ -57,17 +57,23 @@ class Base {
       return final;
     }
 
-    function matcher(obj, qualifier) {
-      if (typeof obj !== 'string') throw new Error(`expected a string for obj, recieved ${obj}`);
-      if (typeof qualifier === 'string' || qualifier instanceof RegExp) return obj.match(qualifier);
-      if (qualifier instanceof Function) return qualifier(obj);
-      throw new Error('expected string/regex or function for qualifier');
-    }
-
     options = {
       ...this.client._expect,
       ...options,
     };
+
+    function matcher(obj, qualifier) {
+      if (typeof obj !== 'string') throw new Error(`expected a string for obj, recieved ${obj}`);
+      if (typeof qualifier === 'string') {
+        if (options.caseless) {
+          return obj.toLowerCase().match(qualifier.toLowerCase());
+        }
+        return obj.match(qualifier.toLowerCase());
+      }
+      if (qualifier instanceof RegExp) return obj.match(qualifier);
+      if (qualifier instanceof Function) return qualifier(obj);
+      throw new Error('expected string/regex or function for qualifier');
+    }
 
     function optionsValidator(o) {
       if (o instanceof Object === false) throw new Error(`expected o to be an object. recieved ${o}`);

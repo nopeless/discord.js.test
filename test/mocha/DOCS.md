@@ -85,6 +85,12 @@ message.expectMessage({
   // If true, numbers directly in front or behind words will be rejected
   // like1 this or like 1this
   checkSpacing: true,
+
+  // if true, messages containing @everyone and @here will reject
+  noEveryone: true,
+
+  // if true, strings are caseless. Default to true
+  caseless: true
 });
 
 // Setting up bots
@@ -124,6 +130,7 @@ userClient.setExpect({
 Features:
 (options.from) Now accepts arrays
 (options.noEveryone) New option. Rejects with an error if `@here` or `@everyone` is in the string
+(options.caseless) New option. if true, all strings are caseless by default. Default to true
 (Base.js expect) now has easier to understand error messages
 
 Bug fixes:
