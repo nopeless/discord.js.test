@@ -49,10 +49,7 @@ const userClient = new Discord.Client({
 });
 userClient.setExpect({
   delay: 5000,
-  flags: {
-    'no-null': true,
-    'no-undefined': true,
-  },
+  noFalsy: true,
   from: process.env.DISCORD_BOT_ID,
   timeout: 5000,
   reply: true,
