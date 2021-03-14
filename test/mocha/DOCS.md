@@ -128,6 +128,9 @@ userClient.setExpect({
 
 # Update logs
 
+# 1.1.2
+Minor fix for options.caseless
+
 ## 1.1.1
 
 Features:
