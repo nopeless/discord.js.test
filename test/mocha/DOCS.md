@@ -90,6 +90,9 @@ message.expectMessage({
   noEveryone: true,
 
   // if true, strings are caseless. Default to true
+  // However, this ONLY turns the message content into lowercase, and does not apply to discord generated names (usernames, channel names, role names)
+  // ex) every: ["apple"] matches tim#1234: Apple
+  // but every: ["Apple"] does not match tim#1234: Apple
   caseless: true
 });
 

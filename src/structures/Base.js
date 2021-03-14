@@ -42,7 +42,7 @@ class Base {
       return final;
     }
 
-    function messageResolvables(message) {
+    function messageResolvables(message, { lowercase = true }) {
       const final = [];
 
       message.rawText = Util.messageToRawText(message);
@@ -53,6 +53,10 @@ class Base {
 
       // Cleaned
       final.push(message.cleanText);
+
+      if (lowercase) {
+        final.forEach((v, i) => (final[i] = v.toLowerCase()));
+      }
 
       return final;
     }
@@ -196,7 +200,7 @@ class Base {
         }
 
         // Handle every, some, none ========================================================
-        const resolvables = messageResolvables(m);
+        const resolvables = messageResolvables(m, { lowercase: options.caseless ?? false });
 
         // Everything in should, should match
         // every option
