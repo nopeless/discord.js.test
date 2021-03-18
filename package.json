@@ -1,6 +1,6 @@
 {
   "name": "discord.js.test",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A powerful library for unit testing discord bots, built above discord.js",
   "main": "./src/index",
   "types": "./typings/index.d.ts",
