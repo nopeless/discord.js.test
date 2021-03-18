@@ -129,6 +129,44 @@ class Base {
     let reject;
     let settled = false;
 
+    let isDeleted;
+    let delRes;
+    let delRej;
+    if (options.delete === true || options.delete === false) {
+      let deleteListener, deleteBulkListener;
+      if (options.delete) {
+        deleteListener = m => m.id === subjectMessage.id && delRes(true);
+        deleteBulkListener = c => c.has(subjectMessage.id) && delRes(true);
+      } else {
+        deleteListener = m => m.id === subjectMessage.id && delRej(true);
+        deleteBulkListener = c => c.has(subjectMessage.id) && delRej(true);
+      }
+      isDeleted = new Promise((_res, _rej) => {
+        // Assign res and rej here
+        delRes = _res;
+        delRej = _rej;
+        subjectMessage.client.on(`messageDelete`, deleteListener);
+        subjectMessage.client.on(`messageDeleteBulk`, deleteBulkListener);
+      });
+
+      let timer = setTimeout(() => {
+        if (options.delete) {
+          delRej(new Error('message was not deleted'));
+        } else {
+          delRes(true);
+        }
+      }, options.timeout);
+
+      // Delete the event listeners
+      isDeleted.finally(() => {
+        subjectMessage.client.removeListener(`messageDelete`, deleteListener);
+        subjectMessage.client.removeListener(`messageDeleteBulk`, deleteBulkListener);
+        clearTimeout(timer);
+      });
+    } else {
+      isDeleted = null;
+    }
+
     // Resolve this outside
     let returnPromise = new Promise((res, rej) => {
       resolve = res;
@@ -369,7 +407,13 @@ class Base {
       // Resolve with last or null
       return resolve(last || null);
     });
-    return returnPromise;
+    if (isDeleted === null) {
+      return returnPromise;
+    } else if (options.reply === false) {
+      return isDeleted;
+    }
+    // Return return promise anyway
+    return Promise.all([returnPromise, isDeleted]).then(() => returnPromise);
   }
 
   _clone() {

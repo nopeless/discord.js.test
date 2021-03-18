@@ -22,4 +22,18 @@ describe('Basic Test', function () {
       });
     });
   });
+  describe('delete this', function () {
+    it('should delete f*ck', async function () {
+      return (await member.channel(`general`).send(`fuck you`)).expectMessage({
+        delete: true,
+        every: [`nsfw`],
+      });
+    });
+    it('should silently delete retard', async function () {
+      return (await member.channel(`general`).send(`retarded idiot`)).expectMessage({
+        delete: true,
+        reply: false,
+      });
+    });
+  });
 });

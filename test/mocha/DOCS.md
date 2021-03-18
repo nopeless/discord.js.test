@@ -51,6 +51,13 @@ message.expectMessage({
   // default to true
   reply: true,
 
+  // If true, only resolve when both message is deleted and there is a reply.
+  // If set to false, the bot waits timeout to end then resolve with the message
+  // If set to undefined, the bot will resolve when the bot replies (default behavior)
+  // However, it is not guarenteed to return a specific resolve, since it was pretty controversial when designing this code.
+  // If the message is deleted before a reply was created, then this will return an error
+  delete: false,
+
   ///////////////////////////////////////////////////////////////////////////////////////
   // Applies to only messages
   // This config is applied on top of the global config.
@@ -127,6 +134,10 @@ userClient.setExpect({
 | 12.5.1     | 1.1.x                           |
 
 # Update logs
+
+
+# 1.1.3
+Added options.delete
 
 # 1.1.2
 Minor fix for options.caseless

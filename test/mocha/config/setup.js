@@ -36,6 +36,13 @@ botClient.on(`message`, m => {
   if (m.content === '!react' && !m.author.bot) {
     m.react('😂');
   }
+  if (m.content.match(/fuck|shit/i)) {
+    m.delete().catch(console.error);
+    m.channel.send('nsfw word detected');
+  }
+  if (m.content.match(/retard|bitch/i)) {
+    m.delete().catch(console.error);
+  }
 });
 
 const ciClient = new Discord.Client({
