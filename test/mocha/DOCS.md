@@ -84,6 +84,9 @@ message.expectMessage({
   // defaults to true
   noOverflow: true,
 
+  // If true, noDoubleSpace, checkSpacing, noFalsy will be disabled
+  art: false
+
   // If true, double spaces in messages should be rejected
   // like  this, as this is usually a formatting issue
   // this is checked on the stripped, cleaned (but with trailing spaces removed) text
@@ -134,6 +137,9 @@ userClient.setExpect({
 | 12.5.1     | 1.1.x                           |
 
 # Update logs
+
+# 1.1.6
+Add `options.art`
 
 # 1.1.5
 Fix bug in Util.removeMarkdown

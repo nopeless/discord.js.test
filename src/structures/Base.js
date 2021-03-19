@@ -272,7 +272,7 @@ class Base {
         // Handle noFalsy ========================================================
         // prevent emojis named undefined, NaN, null, from triggering this error
         let match;
-        if (options.noFalsy) {
+        if (options.noFalsy && !options.art) {
           const noSpecial = Util.stripURL(Util.stripEmojis(m.rawText));
           match = noSpecial.match(/undefined|null|NaN|\[object [_$\w][\d\w_$]*\]/);
           if (match) {
@@ -289,12 +289,12 @@ class Base {
             return reject(new Error("The message was exactly 2000 'options.noOverflow'"));
           }
         }
-        if (options.noDoubleSpace) {
+        if (options.noDoubleSpace && !options.art) {
           if (m.rawText.match(/ {2,}/)) {
             return reject(new Error("The message had two consecutive spaces 'options.noDoubleSpace'"));
           }
         }
-        if (options.checkSpacing) {
+        if (options.checkSpacing && !options.art) {
           const humanText = Util.humanize(m.rawText);
           match = humanText.match(/(?:[A-Za-z]\d|\d[A-Za-z]).{0,10}/s);
           if (match) {
