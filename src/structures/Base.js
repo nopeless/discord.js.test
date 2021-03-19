@@ -296,7 +296,7 @@ class Base {
         }
         if (options.checkSpacing) {
           const humanText = Util.humanize(m.rawText);
-          match = humanText.match(/(?:\w\d|\d\w).{0,10}/s);
+          match = humanText.match(/(?:[A-Za-z]\d|\d[A-Za-z]).{0,10}/s);
           if (match) {
             return reject(
               new Error(`The message had a number next to a letter here -> '${match[0]}' 'options.checkSpacing'`),
