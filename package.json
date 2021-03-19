@@ -33,6 +33,10 @@
   },
   "keywords": [
     "test",
+    "unit",
+    "testing",
+    "mocha",
+    "mock",
     "discord",
     "api",
     "bot",
