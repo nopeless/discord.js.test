@@ -37,6 +37,7 @@ class RESTManager {
 
   request(method, url, options = {}) {
     const apiRequest = new APIRequest(this, method, url, options);
+    apiRequest.stack = new Error('STACK').stack;
     let handler = this.handlers.get(apiRequest.route);
 
     if (!handler) {

@@ -151,6 +151,8 @@ class RequestHandler {
         throw new HTTPError(err.message, err.constructor.name, err.status, request.method, request.path);
       }
 
+      // Log the stack trace of the object as well
+      console.error('Stack trace provided by your friendly tool discord.js.test', request.stack);
       throw new DiscordAPIError(request.path, data, request.method, res.status);
     }
 
