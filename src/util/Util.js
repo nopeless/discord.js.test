@@ -96,7 +96,7 @@ class Util {
     let isCodeblock = false;
     const finalBlocks = [];
     for (const block of splitByCodeBlock(text)) {
-      if (isCodeblock) {
+      if (!isCodeblock) {
         finalBlocks.push(removeMarkdown(block));
       } else {
         finalBlocks.push(block);
@@ -201,11 +201,13 @@ class Util {
   }
 
   static humanize(text) {
-    return this.stripEmojis(this.stripURL(text))
-      .replace(/@(everyone|here)(?:(?!\n)\s)?/g, '')
-      .replace(/<@!?(\d{17,19})>(?:(?!\n)\s)?/g, '')
-      .replace(/<@&(\d{17,19})>(?:(?!\n)\s)?/g, '')
-      .replace(/<#(\d{17,19})>(?:(?!\n)\s)?/g, '');
+    return this.removeMarkdown(
+      this.stripEmojis(this.stripURL(text))
+        .replace(/@(everyone|here)(?:(?!\n)\s)?/g, '')
+        .replace(/<@!?(\d{17,19})>(?:(?!\n)\s)?/g, '')
+        .replace(/<@&(\d{17,19})>(?:(?!\n)\s)?/g, '')
+        .replace(/<#(\d{17,19})>(?:(?!\n)\s)?/g, ''),
+    );
   }
 
   /**
