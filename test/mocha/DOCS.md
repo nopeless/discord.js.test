@@ -135,6 +135,8 @@ userClient.setExpect({
 
 # Update logs
 
+# 1.1.5
+Fix bug in Util.removeMarkdown
 
 # 1.1.4
 Fix `options.checkSpacing`
