@@ -137,6 +137,7 @@ userClient.setExpect({
 
 # 1.1.5
 Fix bug in Util.removeMarkdown
+Added a stack trace for data on certain discord api errors (useful for debugging)
 
 # 1.1.4
 Fix `options.checkSpacing`
