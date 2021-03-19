@@ -136,6 +136,9 @@ userClient.setExpect({
 # Update logs
 
 
+# 1.1.4
+Fix `options.checkSpacing`
+
 # 1.1.3
 Added options.delete
 
