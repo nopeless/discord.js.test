@@ -21,6 +21,7 @@ const delay = {
   get sleep() {
     return this._sleep || 0;
   },
+  skip: false,
 };
 // Set up clients
 const botClient = new Discord.Client({
@@ -148,7 +149,7 @@ exports.mochaHooks = {
     }
   },
   async beforeEach() {
-    if (delay.sleep) {
+    if (delay.sleep && !delay.skip) {
       if (delay.sleep > 0) {
         await sleep(delay.sleep);
       }
