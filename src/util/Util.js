@@ -210,6 +210,19 @@ class Util {
     );
   }
 
+  static removeCodeBlocks(text) {
+    if (!text) return '';
+    let isCode = false;
+    const ret = [];
+    for (const block of text.split(/```(?:[A-Za-z0-9\-+]*\n)?/)) {
+      if (!isCode) {
+        ret.push(block);
+      }
+      isCode = !isCode;
+    }
+    return ret.join('\n');
+  }
+
   /**
    * Escapes any Discord-flavour markdown in a string.
    * @param {string} text Content to escape
