@@ -85,7 +85,10 @@ message.expectMessage({
   noOverflow: true,
 
   // If true, noDoubleSpace, checkSpacing, noFalsy will be disabled
-  art: false
+  art: false,
+  // same as art but only in code blocks
+  // default to false
+  code: false,
 
   // If true, double spaces in messages should be rejected
   // like  this, as this is usually a formatting issue
@@ -140,6 +143,7 @@ userClient.setExpect({
 
 # 1.1.6
 Add `options.art`
+Add `Util.removeCodeBlocks`
 
 # 1.1.5
 Fix bug in Util.removeMarkdown
