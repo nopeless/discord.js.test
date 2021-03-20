@@ -168,6 +168,8 @@ class Client extends BaseClient {
       noFalsy: true,
       noZeroWidthSpace: true,
       noOverflow: true,
+      art: false,
+      code: false,
       from: undefined,
       delay: 1000,
       timeout: 5000,
