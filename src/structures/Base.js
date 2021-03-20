@@ -290,11 +290,12 @@ class Base {
           }
         }
         if (options.noDoubleSpace && !options.art) {
-          if (m.rawText.match(/ {2,}/)) {
+          if (m.cleanText.match(/ {2,}/)) {
             return reject(new Error("The message had two consecutive spaces 'options.noDoubleSpace'"));
           }
         }
         if (options.checkSpacing && !options.art) {
+          // Use raw text and pass it into humanize instead
           const humanText = Util.humanize(m.rawText);
           match = humanText.match(/(?:[A-Za-z]\d|\d[A-Za-z]).{0,10}/s);
           if (match) {
