@@ -42,11 +42,16 @@ class Base {
       return final;
     }
 
-    function messageResolvables(message, { lowercase = true }) {
+    function messageResolvables(message, { lowercase = true, code = false }) {
       const final = [];
 
       message.rawText = Util.messageToRawText(message);
       message.cleanText = Util.messageToText(message);
+
+      if (code) {
+        message.rawText = Util.removeCodeBlocks(message.rawText);
+        message.cleanText = Util.removeCodeBlocks(message.cleanText);
+      }
 
       // Raw
       final.push(message.rawText);
@@ -238,7 +243,7 @@ class Base {
         }
 
         // Handle every, some, none ========================================================
-        const resolvables = messageResolvables(m, { lowercase: options.caseless ?? false });
+        const resolvables = messageResolvables(m, { lowercase: options.caseless ?? false, removeCode: options.code });
 
         // Everything in should, should match
         // every option
